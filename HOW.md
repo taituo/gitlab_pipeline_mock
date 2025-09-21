@@ -35,6 +35,7 @@ make run
 
 - Starts `uvicorn app.main:app --reload` using the virtualenv binary.
 - Export `MOCK_TOKEN` before running to match your client expectations.
+- Visit `http://localhost:8000/docs` (Swagger UI) or `/redoc` to browse the OpenAPI contract, or download `/openapi.json` for tooling.
 
 ## Clean the environment
 

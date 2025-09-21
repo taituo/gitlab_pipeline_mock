@@ -1,6 +1,6 @@
 # Usage Examples
 
-This guide shows how to exercise the mock GitLab pipeline trigger service using `curl` once the app is running locally (`make run`). Replace placeholders as needed.
+This guide shows how to exercise the mock GitLab pipeline trigger service using `curl` once the app is running locally (`make run`). Replace placeholders as needed. Explore the live API contract at `http://localhost:8000/docs` or fetch the raw schema from `/openapi.json`.
 
 ## Trigger a pipeline with preset scenario
 

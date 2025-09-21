@@ -2,6 +2,8 @@
 
 Base URL defaults to `http://localhost:8000`. All endpoints require the same private token defined with env var `MOCK_TOKEN` (default `MOCK_SUPER_SECRET`). Supply it using either `PRIVATE-TOKEN: <token>` or `Authorization: Bearer <token>`.
 
+The FastAPI app serves this contract at `/openapi.json` and exposes interactive docs at `/docs` (Swagger UI) and `/redoc` (ReDoc).
+
 ## Pipeline endpoints
 
 ### POST `/projects/{project_id}/trigger/pipeline`

@@ -57,3 +57,8 @@ SQLite database `mock.db` with two tables:
 - Implement optional `/reset` endpoint guarded by env flag to drop all data.
 - Add filtering/query options for pipeline listing.
 - Support persistence of per-project trigger tokens.
+
+## OpenAPI contract
+
+- The canonical contract is defined in `API.md` and served dynamically by the FastAPI application at `/openapi.json` (with Swagger UI at `/docs` and ReDoc at `/redoc`).
+- Keep the generated OpenAPI document aligned with code changes by updating `app/openapi.py` alongside any endpoint modifications.
