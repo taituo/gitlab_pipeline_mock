@@ -2,7 +2,17 @@
 
 A FastAPI + SQLite mock that simulates GitLab's pipeline trigger endpoints for deterministic integration tests.
 
-## Development setup
+## Quick start with Make
+
+```sh
+make install     # create .venv and install dependencies
+make test        # run pytest inside the virtualenv
+make run         # launch uvicorn with auto-reload
+```
+
+Set `PYTHON` env var if you need a specific interpreter (defaults to `python3`).
+
+## Development setup (manual)
 
 1. Create a virtualenv and install dependencies:
    ```sh
