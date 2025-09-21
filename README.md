@@ -40,4 +40,17 @@ curl -s -H "PRIVATE-TOKEN: ${MOCK_TOKEN}" \
   "http://localhost:8000/projects/123/pipelines/1" | jq .status
 ```
 
+## Endpoints overview
+
+- `POST /projects/{project_id}/trigger/pipeline` — trigger a new pipeline (JSON or form payloads supported).
+- `GET /projects/{project_id}/pipelines/{pipeline_id}` — fetch current pipeline state, including computed status.
+- `GET /_mock/pipelines` — list pipelines stored in the mock database.
+- `DELETE /_mock/pipelines/{pipeline_id}` — remove a pipeline row.
+- `GET /_mock/scenarios` — view seeded and user-defined scenarios.
+- `POST /_mock/scenarios` — create a scenario with custom duration/status.
+- `PUT /_mock/scenarios/{scenario_id}` — update a scenario definition.
+- `DELETE /_mock/scenarios/{scenario_id}` — delete a scenario (pipelines fall back to inline settings).
+
+Authentication expects `MOCK_TOKEN` via `PRIVATE-TOKEN` header (or `Authorization: Bearer`).
+
 For more details see `SPEC.md` and `API.md`.
