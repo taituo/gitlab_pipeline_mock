@@ -48,6 +48,19 @@ make test
 - `docs/API.md` – detailed REST contract; also served live at `/openapi.json` with Swagger UI at `/docs` and ReDoc at `/redoc`.
 - `docs/START.md` – original project brief.
 
+## Endpoints Overview
+
+- `POST /projects/{project_id}/trigger/pipeline` — trigger a new pipeline (JSON or form payloads supported).
+- `GET /projects/{project_id}/pipelines/{pipeline_id}` — fetch current pipeline state, including computed status.
+- `GET /_mock/pipelines` — list pipelines stored in the mock database.
+- `DELETE /_mock/pipelines/{pipeline_id}` — remove a pipeline row.
+- `GET /_mock/scenarios` — view seeded and user-defined scenarios.
+- `POST /_mock/scenarios` — create a scenario with custom duration/status.
+- `PUT /_mock/scenarios/{scenario_id}` — update a scenario definition.
+- `DELETE /_mock/scenarios/{scenario_id}` — delete a scenario (pipelines fall back to inline settings).
+
+Authentication expects the `MOCK_TOKEN` value via either the `PRIVATE-TOKEN` header or an `Authorization: Bearer` token.
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for details.
