@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.env
+.venv/
+.mock.db
+mock.db
+*.sqlite
+*.sqlite3
+/.pytest_cache/
+/.coverage
+coverage.xml
+htmlcov/
