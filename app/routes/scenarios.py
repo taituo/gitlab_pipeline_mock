@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
@@ -61,12 +61,12 @@ def update_scenario(
     return ScenarioList.model_validate(db_scenario)
 
 
-@router.delete("/{scenario_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{scenario_id}", status_code=status.HTTP_204_NO_CONTENT, response_class=Response)
 def delete_scenario(
     scenario_id: int,
     _: None = Depends(require_token),
     db: Session = Depends(get_db),
-) -> None:
+) -> Response:
     scenario = db.get(Scenario, scenario_id)
     if scenario is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Scenario not found")
@@ -74,3 +74,4 @@ def delete_scenario(
     db.execute(update(Pipeline).where(Pipeline.scenario_id == scenario_id).values(scenario_id=None))
     db.delete(scenario)
     db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

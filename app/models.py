@@ -33,7 +33,7 @@ class Pipeline(Base):
     scenario_id: Mapped[Optional[int]] = mapped_column(Integer, ForeignKey("scenarios.scenario_id", ondelete="SET NULL"), nullable=True)
     terminal_after_seconds: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     terminal_status: Mapped[Optional[str]] = mapped_column(String, nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=datetime.utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=datetime.utcnow)
 
     scenario: Mapped[Optional[Scenario]] = relationship(back_populates="pipelines")

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Dict, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -191,15 +191,17 @@ def list_pipelines(
 @router.delete(
     "/_mock/pipelines/{pipeline_id}",
     status_code=status.HTTP_204_NO_CONTENT,
+    response_class=Response,
 )
 def delete_pipeline(
     pipeline_id: int,
     _: None = Depends(require_token),
     db: Session = Depends(get_db),
-) -> None:
+) -> Response:
     pipeline = db.get(Pipeline, pipeline_id)
     if pipeline is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Pipeline not found")
 
     db.delete(pipeline)
     db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

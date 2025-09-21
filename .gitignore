@@ -10,3 +10,4 @@ mock.db
 /.coverage
 coverage.xml
 htmlcov/
+*.egg-info/
