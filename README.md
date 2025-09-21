@@ -12,6 +12,10 @@ make run         # launch uvicorn with auto-reload
 
 Set `PYTHON` env var if you need a specific interpreter (defaults to `python3`).
 
+Additional guides:
+- `EXAMPLE.md` – step-by-step `curl` recipes for triggering, polling, and managing scenarios.
+- `HOW.md` – build, test, and run instructions mapped to the project Make targets.
+
 ## Development setup (manual)
 
 1. Create a virtualenv and install dependencies:
