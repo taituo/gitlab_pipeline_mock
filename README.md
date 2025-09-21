@@ -1,74 +1,52 @@
-# Mock GitLab Pipeline Trigger Service
+# gitlab_pipeline_mock
 
-A FastAPI + SQLite mock that simulates GitLab's pipeline trigger endpoints for deterministic integration tests.
+Fast, deterministic pipelines for your GitLab CI/CD integration tests.
 
-## Quick start with Make
+## What & Why
 
-```sh
-make help        # list available targets
-make install     # create .venv and install dependencies
-make test        # run pytest inside the virtualenv
-make run         # launch uvicorn with auto-reload
-```
+When testing GitLab CI/CD integrations, using the real GitLab service can be slow, unpredictable, or hard to reproduce specific cases. `gitlab_pipeline_mock` is a lightweight service that mimics GitLab’s pipeline APIs, letting you simulate different pipeline states in a fully controlled way. This keeps your integration tests fast, deterministic, and safe.
 
-Set `PYTHON` env var if you need a specific interpreter (defaults to `python3`).
+## What It Does
 
-Additional guides:
-- `EXAMPLE.md` – step-by-step `curl` recipes for triggering, polling, and managing scenarios.
-- `HOW.md` – build, test, and run instructions mapped to the project Make targets.
+- Trigger mock pipelines with defined outcomes (success, failure, long running, etc.).
+- Poll for pipeline status as it progresses through the scenario you set.
+- Create, update, and delete scenarios for flexible test setups.
+- Secure the API with token-based authentication.
 
-## Development setup (manual)
+## How It Works
 
-1. Create a virtualenv and install dependencies:
+- Runs as a FastAPI application backed by SQLite storage.
+- Scenarios declare timing, status, and completion rules that drive pipeline transitions.
+- Your tests talk to this mock instead of GitLab’s API.
+- The mock responds with GitLab-shaped payloads so clients behave exactly as they would against the real service.
+
+## Getting Started
+
+1. Clone the repo and explore available commands:
    ```sh
-   python -m venv .venv
-   source .venv/bin/activate
-   pip install -e .[dev]
+   git clone git@github.com:taituo/gitlab_pipeline_mock.git
+   cd gitlab_pipeline_mock
+   make help
    ```
-2. Seed the default scenarios and launch the server:
+2. Install dependencies and run the service:
    ```sh
-   export MOCK_TOKEN=MOCK_SUPER_SECRET
-   uvicorn app.main:app --reload
+   make install
+   make run
    ```
+3. Point your integration tests at `http://localhost:8000` and trigger pipelines using your preferred HTTP client. Sample `curl` flows live in `docs/EXAMPLE.md`.
 
-## Running tests
-
+To run the automated test suite at any time:
 ```sh
-pytest
+make test
 ```
 
-## API quick start
+## Documentation & References
 
-Trigger a pipeline that completes after 5 minutes:
-
-```sh
-curl -s -X POST "http://localhost:8000/projects/123/trigger/pipeline" \
-  -H "PRIVATE-TOKEN: ${MOCK_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d '{"token": "TRIGGER", "ref": "main", "scenario_id": 500}'
-```
-
-Then poll:
-
-```sh
-curl -s -H "PRIVATE-TOKEN: ${MOCK_TOKEN}" \
-  "http://localhost:8000/projects/123/pipelines/1" | jq .status
-```
-
-## Endpoints overview
-
-- `POST /projects/{project_id}/trigger/pipeline` — trigger a new pipeline (JSON or form payloads supported).
-- `GET /projects/{project_id}/pipelines/{pipeline_id}` — fetch current pipeline state, including computed status.
-- `GET /_mock/pipelines` — list pipelines stored in the mock database.
-- `DELETE /_mock/pipelines/{pipeline_id}` — remove a pipeline row.
-- `GET /_mock/scenarios` — view seeded and user-defined scenarios.
-- `POST /_mock/scenarios` — create a scenario with custom duration/status.
-- `PUT /_mock/scenarios/{scenario_id}` — update a scenario definition.
-- `DELETE /_mock/scenarios/{scenario_id}` — delete a scenario (pipelines fall back to inline settings).
-
-Authentication expects `MOCK_TOKEN` via `PRIVATE-TOKEN` header (or `Authorization: Bearer`).
-
-For more details see `SPEC.md` and `API.md`. The live OpenAPI document is served at `http://localhost:8000/openapi.json` (Swagger UI: `/docs`, ReDoc: `/redoc`).
+- `docs/HOW.md` – build, run, and test automation via Make.
+- `docs/EXAMPLE.md` – hands-on examples for triggering and polling pipelines.
+- `docs/SPEC.md` – technical specification of behaviours and data model.
+- `docs/API.md` – detailed REST contract; also served live at `/openapi.json` with Swagger UI at `/docs` and ReDoc at `/redoc`.
+- `docs/START.md` – original project brief.
 
 ## License
 
