@@ -68,7 +68,7 @@ curl -s -H "PRIVATE-TOKEN: ${MOCK_TOKEN}" \
 
 Authentication expects `MOCK_TOKEN` via `PRIVATE-TOKEN` header (or `Authorization: Bearer`).
 
-For more details see `SPEC.md` and `API.md`.
+For more details see `SPEC.md` and `API.md`. The live OpenAPI document is served at `http://localhost:8000/openapi.json` (Swagger UI: `/docs`, ReDoc: `/redoc`).
 
 ## License
 

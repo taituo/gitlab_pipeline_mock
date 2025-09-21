@@ -6,6 +6,7 @@ from fastapi import FastAPI
 
 from .config import get_settings
 from .database import Base, get_engine, init_engine, session_scope
+from .openapi import attach_custom_openapi
 from .routes import pipelines, scenarios
 from .seeding import seed_scenarios
 
@@ -32,6 +33,8 @@ def create_app() -> FastAPI:
 
     app.include_router(pipelines.router)
     app.include_router(scenarios.router)
+
+    attach_custom_openapi(app)
 
     return app
 
