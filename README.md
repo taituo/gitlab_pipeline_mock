@@ -68,3 +68,7 @@ curl -s -H "PRIVATE-TOKEN: ${MOCK_TOKEN}" \
 Authentication expects `MOCK_TOKEN` via `PRIVATE-TOKEN` header (or `Authorization: Bearer`).
 
 For more details see `SPEC.md` and `API.md`.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for details.
