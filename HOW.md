@@ -5,6 +5,13 @@ These commands wrap the project workflow. All tasks run inside the local virtual
 ## Install dependencies
 
 ```sh
+make help
+```
+
+- Lists the available Make targets and what they do.
+- Use `make install`, `make test`, or `make run` as described below.
+
+```sh
 make install
 ```
 

@@ -5,6 +5,7 @@ A FastAPI + SQLite mock that simulates GitLab's pipeline trigger endpoints for d
 ## Quick start with Make
 
 ```sh
+make help        # list available targets
 make install     # create .venv and install dependencies
 make test        # run pytest inside the virtualenv
 make run         # launch uvicorn with auto-reload
